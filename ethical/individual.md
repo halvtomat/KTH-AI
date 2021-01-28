@@ -1,5 +1,5 @@
+<p style="text-align: right">Daniel Gustafsson</p>
+<p style="text-align: right">danielg8@kth.se</p>
+
 # Individual Essay on AI Ethics
-
-https://medium.com/@francois.chollet/the-impossibility-of-intelligence-explosion-5be4a9eda6ec *nr 6*
-
 
