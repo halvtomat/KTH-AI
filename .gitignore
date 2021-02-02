@@ -17,3 +17,5 @@
 *.png
 *.swp
 .vscode/
+*.pyc
+*.pyo
