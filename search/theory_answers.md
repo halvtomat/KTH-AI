@@ -10,7 +10,6 @@ Terminal states are either when there are no fish left or when the time runs out
 
 ## Q3
 It is a good heuristic because it is simple yet it judges a move based on the most important aspect of the game, the score, which is what makes a player win.
-The heuristic doesn't use the opponents moves to calculate utility, but in this game the opponent doesn't affect the player that much so it's OK.
 
 ## Q4
 When a fish is on the hook *v* would probably approximate the utility function pretty good, because then it will find a set of moves that grants an incresed score.
