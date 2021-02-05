@@ -95,7 +95,7 @@ class PlayerControllerMinimax(PlayerController):
         children = node.compute_and_get_children()
         moves = []
         for child in children:
-            moves.append(self.minimax(node=child, player=0, depth=3))
+            moves.append(self.minimax(node=child, player=0, depth=2, alpha=-math.inf, beta=math.inf))
 
         best_move = moves.index(max(moves))
         return ACTION_TO_STR[best_move]
@@ -104,36 +104,42 @@ class PlayerControllerMinimax(PlayerController):
         score_p0, score_p1 = node.state.get_player_scores()
         utility = score_p0 - score_p1
         if player == 1:
-            return -utility
-        utility -= self.closest_fish_distance(node)
+            utility = -utility
+        else:
+            utility = utility - self.closest_fish_distance(node, player)
         return utility
 
-    def minimax(self, node, player, depth):
-
+    def minimax(self, node, player, depth, alpha, beta):
         # if no fishes --> terminal state
-        if not list(node.state.get_fish_positions().keys()) == [] or depth == 0:
-            return self.state_utility(node=node, player=0)
+        if list(node.state.get_fish_positions().keys()) == [] or depth == 0:
+            v = self.state_utility(node=node, player=0)
         
         else:
             if player == 0:
-                bestpossible = -math.inf
+                v = -math.inf
                 for child in node.compute_and_get_children():
-                    v = self.minimax(node=child, player=1, depth=depth-1)
-                    bestpossible = max(bestpossible, v)
-                return bestpossible
+                    v = max(v, self.minimax(node=child, player=1, depth=depth-1, alpha=alpha, beta=beta))
+                    alpha = max(alpha, v)
+                    if(beta <= alpha):
+                        break
             
             else:
-                bestpossible = math.inf
+                v = math.inf
                 for child in node.compute_and_get_children():
-                    v = self.minimax(node=child, player=0, depth=depth-1)
-                    bestpossible = min(bestpossible, v)
-                return bestpossible
+                    v = min(v, self.minimax(node=child, player=0, depth=depth-1, alpha=alpha, beta=beta))
+                    beta = min(beta, v)
+                    if(beta <= alpha):
+                        break
+        
+        return v
 
-    def closest_fish_distance(self, node):
+    def closest_fish_distance(self, node, player):
         dist = []
         hooks = node.state.get_hook_positions()
         for fish in list(node.state.get_fish_positions().values()):
-            dist.append(self.fish_hook_distance(hooks[0], fish))
+            dist.append(self.fish_hook_distance(hooks[player], fish))
+        if(dist == []):
+            return 0
         return min(dist)
 
     def fish_hook_distance(self, hook, fish):
