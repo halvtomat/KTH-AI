@@ -18,46 +18,48 @@ def init_seq(line, l):
     for i in range(a):
         l.append(int(line[i + 1]))
 
-def transish(transition, state):
-    state2 = [[]]
-    for i in range(len(state[0])):
-        sum = 0
-        for j in range(len(state[0])):
-            sum += state[0][j] * transition[j][i]
-        state2[0].append(sum)
-    return state2
-
-def pre_transish(emission, state, seq, k):
-    state2 = [[]]
-    for i in range(len(state[0])):
-        state2[0].append(state[0][i] * emission[i][seq[k]])
-    return state2
-
-def solve(transition, emission, state, seq):
-    alpha = []
-    max_index = []
-    for i in range(0,len(seq)):
-        state = pre_transish(emission, state, seq, i)
-        alpha.append(state[0])
-        max_index.append(state[0].index(max(state[0])))
-        state = transish(transition, state)
-    hidden_state = []
-    prev = max_index[len(seq)-1]
-    hidden_state.append(prev)
-    for i in range(1, len(seq)):
-        a = []
-        for j in range(0, len(seq)):
-            a.append(alpha[len(seq)-i-1][j] * transition[j][prev])
-        prev = a.index(max(a))
-        hidden_state.append(prev)
-    hidden_state.reverse()
-    print_list(hidden_state)
-
 def print_list(l):
     s = ""
     for e in l:
-        s += str(round(e,3)) + " "
+        s += str(e) + " "
     print(s)
+
+def observe(emission, state, seq, k):
+    for i in range(len(state[0])):
+        state[0][i] = state[0][i] * emission[i][seq[k]]
+
+def next_state(transition, state, argmax):
+    argmax_temp = []
+    next_state = [[]]
+    for i in range(len(state[0])):
+        temp = []
+        for j in range(len(state[0])):
+            temp.append(state[0][j] * transition[j][i])
+            
+        argmax_temp.append(temp.index(max(temp)))
+        next_state[0].append(state[0][max(argmax_temp)] * transition[max(argmax_temp)][i])
+
+    argmax.append(argmax_temp)
+    state[0] = next_state[0]
+
+
+def solve(transition, emission, state, seq):
+    solution = []
+    argmax = []
+
+    for i in range(len(seq)):
+        observe(emission, state, seq, i)
+        if(i != len(seq)-1):
+            next_state(transition, state, argmax)
+
+    back = state[0].index(max(state[0]))
+    solution.append(back)
+    for i in range(len(seq) - 1):
+        back = argmax[len(seq) - i - 2][back]
+        solution.append(back)
+    solution.reverse()
+    print_list(solution)
+    
 
 transition = []
 emission = []
