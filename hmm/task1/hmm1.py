@@ -18,7 +18,7 @@ def init_seq(line, l):
     for i in range(a):
         l.append(int(line[i + 1]))
 
-def transish(transition, state):
+def next_state(transition, state):
     state2 = [[]]
     for i in range(len(state[0])):
         sum = 0
@@ -27,16 +27,16 @@ def transish(transition, state):
         state2[0].append(sum)
     return state2
 
-def pre_transish(emission, state, seq, k):
+def observe(emission, state, seq, k):
     state2 = [[]]
     for i in range(len(state[0])):
         state2[0].append(state[0][i] * emission[i][seq[k]])
     return state2
 
-def solve2(transition, emission, state, seq):
+def solve(transition, emission, state, seq):
     for i in range(0,len(seq)):
-        state = pre_transish(emission, state, seq, i)
-        state = transish(transition, state)
+        state = observe(emission, state, seq, i)
+        state = next_state(transition, state)
     print(sum(state[0]))
 
 def print_list(l):
@@ -59,4 +59,4 @@ init_float_list(line, init)
 line = sys.stdin.readline()
 init_seq(line, seq)
 
-solve2(transition, emission, init, seq)
+solve(transition, emission, init, seq)

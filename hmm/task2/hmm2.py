@@ -42,14 +42,13 @@ def next_state(transition, state, argmax):
     argmax.append(argmax_temp)
     state[0] = next_state[0]
 
-
 def solve(transition, emission, state, seq):
     solution = []
     argmax = []
 
     for i in range(len(seq)):
         observe(emission, state, seq, i)
-        if(i != len(seq)-1):
+        if(i != len(seq) - 1):
             next_state(transition, state, argmax)
 
     back = state[0].index(max(state[0]))
