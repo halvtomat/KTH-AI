@@ -37,7 +37,7 @@ def next_state(transition, state, argmax):
             temp.append(state[0][j] * transition[j][i])
             
         argmax_temp.append(temp.index(max(temp)))
-        next_state[0].append(state[0][max(argmax_temp)] * transition[max(argmax_temp)][i])
+        next_state[0].append(max(temp))
 
     argmax.append(argmax_temp)
     state[0] = next_state[0]
