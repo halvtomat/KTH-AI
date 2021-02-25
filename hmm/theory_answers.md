@@ -13,7 +13,6 @@ Pi = [0.5, 0.5] A = [[0.5, 0.5], [0.5, 0.5]] B = [[0.9, 0.1], [0.5, 0.5]]
 All neccessary information about the previous observations exist in xi.
 
 ## Q5
-
-
+Both are (hidden state amount) * (length of sequence) big.
 ## Q6
-
+See Bayes' theorem.
