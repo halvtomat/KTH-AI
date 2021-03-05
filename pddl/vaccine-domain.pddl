@@ -83,7 +83,7 @@
         (is-vehicle-at ?y ?z)
     )
     :effect (and 
-        (vehicle-has-freeezer ?y)
+        (vehicle-has-freezer ?y)
         (not (is-object-at ?x ?z))
     )
   )
