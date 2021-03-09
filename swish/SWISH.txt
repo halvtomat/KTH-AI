@@ -55,25 +55,31 @@ sameHospital(C1, C2, Ls) :-
 fact1(Ls) :-
     member(p(c1, _, doctor, _, _), Ls).
 fact2(Ls) :-
-%   Fill here
+    member(p(c3, 20, _, _, _), Ls).
 fact3(Ls) :-
-%   Fill here
+    member(p(c2, _, teacher, _, _), Ls).
 fact4(Ls) :-
-%   Fill here
+    member(p(A, _, _, vac99, karolinska), Ls),
+    not(A == c4).
 fact5(Ls) :-
-%   Fill here
+    member(p(_, _, teacher, _, sofiahemmet), Ls).
 fact6(Ls) :-
-%   Fill here
+    member(p(_, _, nurse, _, karolinska), Ls).
 fact7(Ls) :-
-%   Fill here
+    member(p(a, 70, _, _, _), Ls),
+    sameHospital(a, c3, Ls).
 fact8(Ls) :-
-%   Fill here
+    member(p(_, _, _, vac60, sodersjukhuset), Ls).
 fact9(Ls) :-
-%   Fill here
+    member(p(A, 40, _, _, _), Ls),
+    not(sameGroup(A, c2, Ls)).
 fact10(Ls) :-
-%   Fill here
+    member(p(A, _, driver, _, _), Ls),
+    sameHospital(A, c4, Ls).
 fact11(Ls) :-
-%   Fill here
+    member(p(A, 70, _, _, _), Ls),
+    member(p(B, 90, _, _, _), Ls),
+    sameGroup(A, B, Ls).
 
 % Problem:
 citizens(Ls) :-

@@ -99,7 +99,7 @@
     :parameters (?x ?y ?z)
     :precondition (and
         (or (CITY ?x) (WAREHOUSE ?x))
-        (CITY ?y)
+        (or (CITY ?y) (WAREHOUSE ?y))
         (LONG-RANGE-VEHICLE ?z)
         (connected ?x ?y)
         (is-vehicle-at ?z ?x)

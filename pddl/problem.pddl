@@ -95,12 +95,29 @@
 
   ;; Goal specification
   (:goal
+    ; We want one vaccine per hospital
     (and
-      ; We want one vaccine per hospital
-      (is-object-at V1 H1)
-      (is-object-at V2 H2)
-      (is-object-at V3 H3)
-      (is-object-at V4 H4)
+      (or 
+        (is-object-at V1 H1)
+        (is-object-at V2 H1)
+        (is-object-at V3 H1)
+        (is-object-at V4 H1)
+      ) (or 
+        (is-object-at V1 H2)
+        (is-object-at V2 H2)
+        (is-object-at V3 H2)
+        (is-object-at V4 H2)
+      ) (or 
+        (is-object-at V1 H3)
+        (is-object-at V2 H3)
+        (is-object-at V3 H3)
+        (is-object-at V4 H3)
+      ) (or 
+        (is-object-at V1 H4)
+        (is-object-at V2 H4)
+        (is-object-at V3 H4)
+        (is-object-at V4 H4)
+      )
     )
   )
 )
