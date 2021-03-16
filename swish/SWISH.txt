@@ -66,8 +66,8 @@ fact5(Ls) :-
 fact6(Ls) :-
     member(p(_, _, nurse, _, karolinska), Ls).
 fact7(Ls) :-
-    member(p(a, 70, _, _, _), Ls),
-    sameHospital(a, c3, Ls).
+    member(p(A, 70, _, _, _), Ls),
+    sameHospital(A, c3, Ls).
 fact8(Ls) :-
     member(p(_, _, _, vac60, sodersjukhuset), Ls).
 fact9(Ls) :-
