@@ -125,6 +125,7 @@
         (SHORT-RANGE-VEHICLE ?z)
         (connected ?x ?y)
         (is-vehicle-at ?z ?x)
+        (not (and (CITY ?x) (CITY ?y))
     )
     :effect (and
         (is-vehicle-at ?z ?y)
